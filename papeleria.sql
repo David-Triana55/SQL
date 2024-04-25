@@ -57,8 +57,7 @@ CREATE TABLE ventas_productos (
     id_producto INT NOT NULL,
     PRIMARY KEY (id_venta, id_producto),
     FOREIGN KEY (id_venta) REFERENCES ventas(id_venta),
-    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)\
-  -- many to many
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
 
 CREATE TABLE datos_extra_cliente (
@@ -66,22 +65,21 @@ CREATE TABLE datos_extra_cliente (
     fecha_nacimiento DATE,
     email VARCHAR(50),
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
-  --one to one
 );
 
 INSERT INTO cliente (nombre, direccion, telefono) VALUES
-('Cliente 1', 'Dirección 1', 123456789),
-('Cliente 2', 'Dirección 2', 987654321),
-('Cliente 3', 'Dirección 3', 456789123),
-('Cliente 4', 'Dirección 4', 789123456),
-('Cliente 5', 'Dirección 5', 321654987);
+('David', 'Dirección 1', 123456789),
+('Juan', 'Dirección 2', 987654321),
+('Sofia', 'Dirección 3', 456789123),
+('Carlos', 'Dirección 4', 789123456),
+('Ana', 'Dirección 5', 321654987);
 
 INSERT INTO categorias (descripcion) VALUES
-('Categoría 1'),
-('Categoría 2'),
-('Categoría 3'),
-('Categoría 4'),
-('Categoría 5');
+('Lapices'),
+('Papel'),
+('Carpetas'),
+('Colores'),
+('cuaderno');
 
 INSERT INTO proveedores (nombre, direccion, telefono) VALUES
 ('Proveedor 1', 'Dirección 1', 123456789),
@@ -91,11 +89,11 @@ INSERT INTO proveedores (nombre, direccion, telefono) VALUES
 ('Proveedor 5', 'Dirección 5', 321654987);
 
 INSERT INTO productos (descripcion, precio, id_categoria, id_proveedor) VALUES
-('Producto 1', 10, 1, 1),
-('Producto 2', 20, 2, 2),
-('Producto 3', 15, 1, 2),
-('Producto 4', 25, 2, 1),
-('Producto 5', 30, 1, 1);
+('Lapiz', 5, 1, 1),
+('cuaderno', 20, 5, 2),
+('color', 8, 4, 3),
+('carpete', 12, 3, 4),
+('hoja carta', 30, 2, 5);
 
 INSERT INTO facturas (id_cliente) VALUES
 (1),
@@ -119,6 +117,14 @@ INSERT INTO ventas_productos (id_venta, id_producto) VALUES
 (3, 1),
 (2, 2);
 
+INSERT INTO datos_extra_cliente (id_cliente, fecha_nacimiento, email) VALUES
+(1, '1990-05-15', 'maria@example.com'),
+(2, '1985-09-20', 'jose@example.com'),
+(3, '1992-03-10', 'sara@example.com'),
+(4, '1988-11-25', 'juan@example.com'),
+(5, '1995-07-02', 'santiago@example.com');
+
+
 SELECT * FROM cliente;
 SELECT * FROM categorias;
 SELECT * FROM productos;
@@ -127,3 +133,4 @@ SELECT * FROM facturas;
 SELECT * FROM ventas;
 SELECT * FROM ventas_productos;
 
+SELECT * FROM datos_extra_cliente;
