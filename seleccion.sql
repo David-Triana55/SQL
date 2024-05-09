@@ -519,3 +519,45 @@ WHERE triana.selecciones.id_seleccion = 1
 ORDER BY triana.jugadores.valor_jugador DESC; 
 
 
+
+
+-- consulta 1 
+
+select triana.jugadores.nombre, triana.jugadores.posicion, triana.jugadores.equipo AS nombre_equipo, triana.selecciones.nombre AS nombre_seleccion, triana.tecnicos.nombres AS nombre_tecnico
+from  triana.jugadores
+INNER JOIN triana.selecciones
+ON triana.jugadores.id_seleccion = triana.selecciones.id_seleccion 
+INNER JOIN triana.tecnicos
+ON triana.selecciones.id_tecnico = triana.tecnicos.identificacion
+WHERE triana.jugadores.id_jugador = 9;
+
+-- consulta 2 
+
+select triana.partidos.id_partido, triana.partidos.fecha, triana.jugadores.nombre, triana.jugadores.equipo, triana.selecciones.nombre As nombre_seleccion, triana.goles.descripcion 
+from triana.goles
+INNER JOIN triana.jugadores
+ON triana.goles.id_jugador = triana.jugadores.id_jugador
+INNER JOIN triana.selecciones
+ON triana.jugadores.id_seleccion = triana.selecciones.id_seleccion
+INNER JOIN triana.partidos
+ON triana.goles.id_partido = triana.partidos.id_partido;
+
+-- consulta 3
+
+select * from triana.jugadores;
+
+select triana.jugadores.id_jugador, triana.jugadores.nombre, triana.jugadores.valor_jugador, triana.goles.id_gol
+from triana.goles
+INNER JOIN triana.jugadores
+ON triana.goles.id_jugador = triana.jugadores.id_jugador
+WHERE triana.jugadores.valor_jugador < 5.00;
+
+-- consulta 4
+SELECT triana.partidos.id_partido, triana.partidos.fecha, triana.partidos.goles_local, triana.partidos.goles_visitante, s1.nombre AS nombre_seleccion_local, s2.nombre AS nombre_seleccion_visitante
+FROM triana.partidos
+INNER JOIN triana.selecciones AS s1 
+ON triana.partidos.id_seleccion_local = s1.id_seleccion
+INNER JOIN triana.selecciones AS s2 
+ON triana.partidos.id_seleccion_visitante = s2.id_seleccion
+ORDER BY id_partido asc;
+
